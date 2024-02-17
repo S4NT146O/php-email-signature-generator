@@ -35,4 +35,32 @@ $companyInfo = "Your Company Inc.";
 $signature = generateSignature($userName, $userRole, $userPhone, $userEmail, $companyInfo);
 
 echo $signature;
+
+
+
+// Array of users data
+$users = array(
+    array("John Doe", "Sales Director", "123-456-7890", "john.doe@company.com", "Your Company Inc."),
+    // put more users here
+);
+
+// file where save the signatures
+$folder = 'signatures/';
+
+// Generate and save the signatures for each one user
+foreach ($users as $userData) {
+    list($userName, $userRole, $userPhone, $userEmail, $companyInfo) = $userData;
+    $signature = generateSignature($userName, $userRole, $userPhone, $userEmail, $companyInfo);
+
+    // Create a file name based on the user's name
+    $fileName = $folder . strtolower(str_replace(' ', '_', $userName)) . '_signature.html';
+
+    // Save signature to file
+    file_put_contents($fileName, $signature);
+    echo "Signature for $userName generated and saved in $fileName<br>";
+}
+
+
 ?>
+
+
